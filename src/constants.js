@@ -1,3 +1,5 @@
+// If have troubles, pick actual TLE data from https://celestrak.org/NORAD/elements/gp.php?GROUP=stations&amp;FORMAT=tle
+// written as "ISS (ZARYA)" (should be first in the list)
 const ISS_TLE = `1 25544U 98067A   26003.53276902  .00013553  00000+0  25297-3 0  9999
 2 25544  51.6327  34.5663 0007560 336.0107  24.0528 15.49066978546237`;
 
