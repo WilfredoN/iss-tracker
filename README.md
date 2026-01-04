@@ -10,7 +10,7 @@
 
 - [x] Create apps/ directory for modules
 - [] Create backend API to keep user data and his satellites
-- [ ] Create calculation python script which calculates satellite position related to user location
+- [x] Create calculation python script which calculates satellite position related to user location
 - [ ] Migrate vanilla js to react
 - [ ] Make it work with any satellite (>=1)
 - [ ] Create telegram bot to have push notifications when satellite is near
