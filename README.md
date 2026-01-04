@@ -4,12 +4,14 @@
 
 > Was started as tutorial-following project for ISS tracking
 
-![ISS Tracker demo screenshot](public/demo.png)
+![ISS Tracker demo screenshot](apps/web/public/demo.png)
 
 ## Refactor plan:
 
 - [x] Create apps/ directory for modules
-- [] Create backend API to keep user data and his satellites
+- [ ] Create backend API to keep user data and his satellites
+  - [ ] Finish paswordless auth approach
+  - [ ] Tests?
 - [x] Create calculation python script which calculates satellite position related to user location
 - [ ] Migrate vanilla js to react
 - [ ] Make it work with any satellite (>=1)
