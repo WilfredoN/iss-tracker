@@ -5,3 +5,14 @@
 > Was started with tutorial and improved with own ideas.
 
 ![ISS Tracker demo screenshot](public/demo.png)
+
+## Install
+
+```bash
+git clone https://github.com/WilfredoN/iss-tracker.git
+cd iss-tracker
+cp .env.example .env
+# Fill in your Cesium Ion API key
+pnpm install
+pnpm run dev
+```
