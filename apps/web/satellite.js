@@ -1,0 +1,1 @@
+.pnpm/satellite.js@6.0.1/node_modules/satellite.js

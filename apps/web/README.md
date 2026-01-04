@@ -8,10 +8,11 @@
 
 ## Refactor plan:
 
-- [ ] Create apps/ directory for modules
+- [x] Create apps/ directory for modules
+- [] Create backend API to keep user data and his satellites
+- [ ] Create calculation python script which calculates satellite position related to user location
 - [ ] Migrate vanilla js to react
 - [ ] Make it work with any satellite (>=1)
-- [ ] Create backend API to keep user data and his satellites
 - [ ] Create telegram bot to have push notifications when satellite is near
 - [ ] Combine the client and tg bot with a backend API in Dashboard app
 
