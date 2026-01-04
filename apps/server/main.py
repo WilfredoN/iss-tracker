@@ -2,10 +2,19 @@ from db.database import SessionLocal
 from db.schema import Satellite as SatelliteModel
 from db.schema import User as UserModel
 from fastapi import Depends, FastAPI, HTTPException
-from schemas import SatelliteCreate
+from fastapi.middleware.cors import CORSMiddleware
+from schemas import SatelliteCreate, UserBase
 from sqlalchemy.orm import Session
 
 app = FastAPI(title="Satellite Tracker API")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 def get_db():
@@ -19,6 +28,25 @@ def get_db():
 @app.get("/")
 async def root():
     return {"status": "for all mankind"}
+
+
+@app.post("/users")
+async def create_or_update_user(user: UserBase, db: Session = Depends(get_db)):
+    db_user = (
+        db.query(UserModel).filter(UserModel.telegram_id == user.telegram_id).first()
+    )
+    if db_user:
+        db_user.latitude = user.latitude
+        db_user.longitude = user.longitude
+    else:
+        db_user = UserModel(
+            telegram_id=user.telegram_id,
+            latitude=user.latitude,
+            longitude=user.longitude,
+        )
+        db.add(db_user)
+    db.commit()
+    return {"message": f"User {user.telegram_id} created or updated"}
 
 
 @app.post("/satellites/add")
