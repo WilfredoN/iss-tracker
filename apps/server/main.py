@@ -79,7 +79,7 @@ async def add_satellite(satellite: SatelliteCreate, db: Session = Depends(get_db
     raise HTTPException(status_code=409, detail="Satellite already exists")
 
 
-@app.delete(f"/satellites/{id}")
+@app.delete("/satellites/{id}")
 async def delete_satellite(id: int, db: Session = Depends(get_db)):
     db_satellite = db.query(SatelliteModel).filter(SatelliteModel.id == id).first()
     if not db_satellite:
