@@ -1,5 +1,3 @@
-import re
-
 from db.database import SessionLocal
 from db.schema import Satellite as SatelliteModel
 from db.schema import User as UserModel
