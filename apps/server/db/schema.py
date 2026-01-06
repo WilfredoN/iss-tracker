@@ -1,5 +1,6 @@
 from sqlalchemy import (
     BigInteger,
+    Boolean,
     DateTime,
     Float,
     Integer,
@@ -28,6 +29,7 @@ class Satellite(Base):
     name: Mapped[str] = mapped_column(String(128), nullable=False, unique=True)
     tle_1: Mapped[str] = mapped_column(Text, nullable=False)
     tle_2: Mapped[str] = mapped_column(Text, nullable=False)
+    is_visible: Mapped[bool] = mapped_column(Boolean, nullable=False)
     added_at: Mapped[str] = mapped_column(
         DateTime, nullable=False, server_default=func.now()
     )
