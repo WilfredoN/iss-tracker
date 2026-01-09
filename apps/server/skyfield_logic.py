@@ -2,6 +2,7 @@ from skyfield.api import Topos, load
 from skyfield.iokit import EarthSatellite
 
 
+# TODO: Include cloud cover and light pollution in visibility calculation!!!
 def is_satellite_visible(
     tle_1,
     tle_2,

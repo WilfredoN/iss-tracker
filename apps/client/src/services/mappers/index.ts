@@ -1,0 +1,1 @@
+export { mapApiToSatellite } from './mapApiToSatellite';
