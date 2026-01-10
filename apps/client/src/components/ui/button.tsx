@@ -1,13 +1,8 @@
-import React from 'react';
+import type { ButtonHTMLAttributes } from 'react';
 
-export const Button = ({
-  className = '',
-  style,
-  ...props
-}: React.ButtonHTMLAttributes<HTMLButtonElement>) => (
+export const Button = ({ className = '', ...props }: ButtonHTMLAttributes<HTMLButtonElement>) => (
   <button
-    className={`bg-(--color-accent) text-(--color-accent-foreground) focus-visible:ring-(--color-primary) cursor-pointer rounded-md px-4 py-2 text-base font-medium transition-colors hover:bg-[color-mix(in_oklch,var(--color-accent)_90%,oklch(0.398_0.07_227.392)_10%)] focus-visible:outline-none focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50 ${className}`}
-    style={style}
+    className={`border-2 border-[var(--foreground)] bg-[var(--background)] px-4 py-2 font-bold uppercase tracking-wider text-[var(--foreground)] transition-all hover:bg-[var(--foreground)] hover:text-[var(--background)] hover:shadow-[var(--glow-strong)] focus:shadow-[var(--glow-strong)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-[var(--background)] disabled:hover:text-[var(--foreground)] disabled:hover:shadow-none ${className}`}
     {...props}
   />
 );

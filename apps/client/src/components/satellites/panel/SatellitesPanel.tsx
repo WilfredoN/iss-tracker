@@ -5,9 +5,7 @@ import {
   SatellitesPanelLoading,
   SatellitesPanelError,
 } from '.';
-
 import { SatelliteList } from '../list/SatelliteList';
-
 import { useSatellites } from '../hooks/useSatellites';
 import { AddSatelliteDialog } from '../dialogs/AddSatelliteDialog';
 
@@ -16,18 +14,20 @@ export const SatellitesPanel = () => {
   const [addOpen, setAddOpen] = useState(false);
   const { satellites, isLoading, error, addSatellite } = useSatellites();
 
-  const filteredSatellites = useMemo(() => {
-    return satellites.filter((satellite) =>
-      satellite.name.toLowerCase().includes(search.toLowerCase()),
-    );
-  }, [satellites, search]);
+  const filteredSatellites = useMemo(
+    () =>
+      satellites.filter((satellite) => satellite.name.toLowerCase().includes(search.toLowerCase())),
+    [satellites, search],
+  );
+
+  const handleAddClick = () => setAddOpen(true);
 
   return (
     <SatellitesPanelLayout>
       <SatellitesPanelHeader
         search={search}
         onSearchChange={setSearch}
-        onAddClick={() => setAddOpen(true)}
+        onAddClick={handleAddClick}
       />
       {isLoading ? (
         <SatellitesPanelLoading />

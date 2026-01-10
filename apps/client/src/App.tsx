@@ -2,23 +2,19 @@ import { Viewer } from 'resium';
 import './App.css';
 import { SatellitesPanel } from './components/satellites/panel/SatellitesPanel';
 
-function App() {
-  return (
-    <div className="h-full w-full bg-blue-950 p-2">
-      <div className="flex h-full flex-row justify-between">
-        <SatellitesPanel />
-        <div className="h-fit w-full max-w-5xl rounded-md border-4 border-blue-400 bg-blue-900 p-4">
-          <Viewer
-            baseLayerPicker={false}
-            sceneModePicker={false}
-            homeButton={false}
-            timeline={false}
-            fullscreenButton={false}
-          />
-        </div>
-      </div>
+const App = () => (
+  <div className="flex h-full w-full flex-row gap-2 bg-[var(--background)] p-2">
+    <SatellitesPanel />
+    <div className="flex-1 border-2 border-[var(--foreground)] bg-[var(--panel-bg)] p-1 shadow-[var(--glow)]">
+      <Viewer
+        baseLayerPicker={false}
+        sceneModePicker={false}
+        homeButton={false}
+        timeline={false}
+        fullscreenButton={false}
+      />
     </div>
-  );
-}
+  </div>
+);
 
 export default App;

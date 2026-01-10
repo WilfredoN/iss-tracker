@@ -1,3 +1,5 @@
 export const SatellitesPanelLoading = () => (
-  <div className="text-primary-foreground mt-4 text-sm">Loading...</div>
+  <div className="animate-pulse text-sm uppercase tracking-widest text-[var(--foreground)]">
+    &gt; LOADING SATELLITE DATA...
+  </div>
 );

@@ -1,13 +1,8 @@
-import React from 'react';
+import type { InputHTMLAttributes } from 'react';
 
-export const Input = ({
-  className = '',
-  style,
-  ...props
-}: React.InputHTMLAttributes<HTMLInputElement>) => (
+export const Input = ({ className = '', ...props }: InputHTMLAttributes<HTMLInputElement>) => (
   <input
-    className={`rounded-md border border-[var(--color-accent)] bg-[var(--color-background)] px-3 py-2 text-[var(--color-primary)] outline-none transition-colors placeholder:text-[color-mix(in_oklch,var(--color-primary)_60%,oklch(0.398_0.07_227.392)_40%)] focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] disabled:pointer-events-none disabled:opacity-50 ${className}`}
-    style={style}
+    className={`border-2 border-[var(--foreground)] bg-[var(--input)] px-3 py-2 font-mono tracking-wide text-[var(--foreground)] outline-none transition-all placeholder:text-[var(--muted)] focus:shadow-[var(--glow)] disabled:cursor-not-allowed disabled:opacity-30 ${className}`}
     {...props}
   />
 );
