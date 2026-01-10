@@ -59,6 +59,7 @@ export const useSatellites = (filter: string = '', usePlaceholder = true) => {
     isFetching,
     error,
     addSatellite,
+    addMutation,
     removeSatellite,
     refetch,
   };

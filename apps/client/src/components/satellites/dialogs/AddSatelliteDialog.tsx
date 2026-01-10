@@ -4,17 +4,22 @@ import { Input, Button } from '../../ui';
 import type { AddSatelliteData } from '../../../types';
 import { parseTLEPaste } from './tleHelpers';
 
+import { useSatellites } from '../hooks/useSatellites';
+
 type AddSatelliteDialogProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onAdd: (data: AddSatelliteData) => void;
+  onAdd?: (data: AddSatelliteData) => void;
 };
 
-export const AddSatelliteDialog = ({ open, onOpenChange, onAdd }: AddSatelliteDialogProps) => {
+export const AddSatelliteDialog = ({ open, onOpenChange }: AddSatelliteDialogProps) => {
   const [form, setForm] = useState<AddSatelliteData>({ name: '', tle1: '', tle2: '' });
+  const [error, setError] = useState<string | null>(null);
+  const { addMutation } = useSatellites();
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setError(null);
   }, []);
 
   const handlePaste = useCallback(
@@ -24,24 +29,41 @@ export const AddSatelliteDialog = ({ open, onOpenChange, onAdd }: AddSatelliteDi
       if (parsed !== form) {
         e.preventDefault();
         setForm(parsed);
+        setError(null);
       }
     },
     [form],
   );
 
-  const handleAdd = useCallback(() => {
+  const handleAdd = useCallback(async () => {
     if (form.name && form.tle1 && form.tle2) {
-      onAdd(form);
-      setForm({ name: '', tle1: '', tle2: '' });
-      onOpenChange(false);
+      setError(null);
+      try {
+        await addMutation.mutateAsync(form);
+        setForm({ name: '', tle1: '', tle2: '' });
+        onOpenChange(false);
+      } catch (err: unknown) {
+        let errorMsg = 'Failed to add satellite';
+        if (err instanceof Error && typeof err.message === 'string') {
+          errorMsg = err.message;
+        }
+        setError(errorMsg);
+      }
     }
-  }, [form, onAdd, onOpenChange]);
+  }, [form, addMutation, onOpenChange]);
 
-  const handleClose = useCallback(() => onOpenChange(false), [onOpenChange]);
+  const handleClose = useCallback(() => {
+    setError(null);
+    onOpenChange(false);
+  }, [onOpenChange]);
+
   const isValid = form.name && form.tle1 && form.tle2;
 
   const dialogRef = useOutsideClicks<HTMLDivElement>(() => {
-    if (open) onOpenChange(false);
+    if (open) {
+      setError(null);
+      onOpenChange(false);
+    }
   });
 
   if (!open) return null;
@@ -88,6 +110,7 @@ export const AddSatelliteDialog = ({ open, onOpenChange, onAdd }: AddSatelliteDi
             clearable
           />
         </div>
+        {error && <div className="text-(--destructive) mt-4 text-sm font-semibold">{error}</div>}
         <div className="mt-6 flex justify-end gap-2">
           <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={handleAdd} disabled={!isValid}>
