@@ -23,7 +23,7 @@ export const useSatellites = (filter: string = '', usePlaceholder = true) => {
           )
         : data,
     placeholderData: usePlaceholder ? [ISS_PLACEHOLDER] : [],
-    retry: 3,
+    retry: 5,
     retryDelay: (attempt) => Math.min(2 ** attempt * 1000, 30000),
   });
 
