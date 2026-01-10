@@ -23,6 +23,7 @@ export const SatelliteEntity = ({ satellite }: Props) => {
 
   return (
     <Entity
+      id={satellite.id}
       name={satellite.name}
       position={position}
       point={{ pixelSize: 8, color: Cesium.Color.CHARTREUSE }}
