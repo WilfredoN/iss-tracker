@@ -69,6 +69,7 @@ export const AddSatelliteDialog = ({ open, onOpenChange, onAdd }: AddSatelliteDi
             value={form.name}
             onChange={handleChange}
             onPaste={handlePaste('name')}
+            clearable
           />
           <Input
             name="tle1"
@@ -76,6 +77,7 @@ export const AddSatelliteDialog = ({ open, onOpenChange, onAdd }: AddSatelliteDi
             value={form.tle1}
             onChange={handleChange}
             onPaste={handlePaste('tle1')}
+            clearable
           />
           <Input
             name="tle2"
@@ -83,6 +85,7 @@ export const AddSatelliteDialog = ({ open, onOpenChange, onAdd }: AddSatelliteDi
             value={form.tle2}
             onChange={handleChange}
             onPaste={handlePaste('tle2')}
+            clearable
           />
         </div>
         <div className="mt-6 flex justify-end gap-2">
