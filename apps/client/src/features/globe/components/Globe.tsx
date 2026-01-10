@@ -40,7 +40,7 @@ export const Globe = () => {
   }, [selectedSatellite]);
 
   return (
-    <div className="flex-1 border-2 border-[var(--foreground)] bg-[var(--panel-bg)] p-1 shadow-[var(--glow)]">
+    <div className="border-(--foreground) bg-(--panel-bg) shadow-(--glow) h-fit flex-1 border-2 p-1">
       <Viewer
         ref={viewerRef}
         baseLayerPicker={false}

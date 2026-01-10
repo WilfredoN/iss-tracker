@@ -4,7 +4,7 @@ import { Globe } from './features/globe/components/Globe';
 
 const App = () => {
   return (
-    <div className="flex h-full w-full flex-row gap-2 bg-[var(--background)] p-2">
+    <div className="bg-(--background) flex h-full w-full flex-row gap-2 p-2">
       <SatellitesPanel />
       <Globe />
     </div>
