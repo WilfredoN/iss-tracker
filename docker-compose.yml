@@ -38,5 +38,13 @@ services:
     depends_on:
       - redis
 
+  bot:
+    build: ./apps/bot
+    command: python main.py
+    env_file:
+      - ./apps/bot/.env
+    depends_on:
+      - api
+
 volumes:
   postgres_data:
