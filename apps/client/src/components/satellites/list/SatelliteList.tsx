@@ -1,7 +1,8 @@
-import { useShallow } from 'zustand/react/shallow';
 import type { Satellite } from '../../../types/satellite';
-import { useSatelliteStore } from '../../../store';
 import { NoSatellites } from './NoSatellites';
+import { SatelliteListItem } from './SatelliteListItem';
+import { useSatelliteStore } from '../../../store';
+import { useShallow } from 'zustand/react/shallow';
 
 type SatelliteListProps = {
   satellites: Satellite[];
@@ -9,60 +10,27 @@ type SatelliteListProps = {
 };
 
 export const SatelliteList = ({ satellites, panel }: SatelliteListProps) => {
-  const { selectedSatellite, selectSatellite, clearSelection } = useSatelliteStore(
+  const { clearSelection } = useSatelliteStore(
     useShallow((state) => ({
-      selectedSatellite: state.selectedSatellite,
-      selectSatellite: state.selectSatellite,
       clearSelection: state.clearSelection,
     })),
   );
 
-  const handleUlClick = (e: React.MouseEvent<HTMLUListElement>) => {
+  const resetSelectionOnClick = (e: React.MouseEvent<HTMLUListElement>) => {
     if (e.target === e.currentTarget) {
       clearSelection();
     }
   };
+
   return (
-    <ul className="flex-1 space-y-2 overflow-y-auto pr-1" onClick={handleUlClick}>
+    <ul className="flex-1 space-y-2 overflow-y-auto pr-1" onClick={resetSelectionOnClick}>
       {panel && <li>{panel}</li>}
       {satellites.length === 0 ? (
         <NoSatellites />
       ) : (
-        satellites.map((satellite) => {
-          const isSelected = selectedSatellite && satellite.id === selectedSatellite.id;
-          return (
-            <li
-              key={satellite.id}
-              className={[
-                'border-(--foreground) group flex cursor-pointer flex-col border-2 px-3 py-2 transition-all',
-                isSelected
-                  ? 'bg-(--foreground) text-(--background) shadow-(--glow)'
-                  : 'bg-(--input) hover:bg-(--foreground) hover:text-(--background) hover:shadow-(--glow)',
-              ].join(' ')}
-              onClick={() => selectSatellite(satellite)}
-            >
-              <span className="text-base font-bold uppercase tracking-wide">
-                &gt; {satellite.name}
-              </span>
-              <span
-                className={
-                  'mt-1 font-mono text-xs opacity-80 ' +
-                  (isSelected ? 'opacity-100' : 'group-hover:opacity-100')
-                }
-              >
-                TLE1: {satellite.tle1}
-              </span>
-              <span
-                className={
-                  'font-mono text-xs opacity-80 ' +
-                  (isSelected ? 'opacity-100' : 'group-hover:opacity-100')
-                }
-              >
-                TLE2: {satellite.tle2}
-              </span>
-            </li>
-          );
-        })
+        satellites.map((satellite) => (
+          <SatelliteListItem key={satellite.id} satellite={satellite} />
+        ))
       )}
     </ul>
   );
