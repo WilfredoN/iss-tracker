@@ -4,22 +4,22 @@ import type { Satellite } from '../../../types/satellite';
 
 interface SatelliteListItemProps {
   satellite: Satellite;
+  onDelete?: (id: string) => void;
 }
 
-export const SatelliteListItem = ({ satellite }: SatelliteListItemProps) => {
+export const SatelliteListItem = ({ satellite, onDelete }: SatelliteListItemProps) => {
   const { selectedSatellite, selectSatellite } = useSatelliteStore(
     useShallow((state) => ({
       selectedSatellite: state.selectedSatellite,
       selectSatellite: state.selectSatellite,
     })),
   );
-
   const isSelected = selectedSatellite && satellite.id === selectedSatellite.id;
-
+  const isPlaceholder = satellite.id === 'iss';
   return (
     <li
       className={[
-        'border-(--foreground) group flex cursor-pointer flex-col border-2 px-3 py-2 transition-all',
+        'border-(--foreground) group relative flex cursor-pointer flex-col border-2 px-3 py-2 transition-all',
         isSelected
           ? 'bg-(--foreground) text-(--background) shadow-(--glow)'
           : 'bg-(--input) hover:bg-(--foreground) hover:text-(--background) hover:shadow-(--glow)',
@@ -42,6 +42,18 @@ export const SatelliteListItem = ({ satellite }: SatelliteListItemProps) => {
       >
         TLE2: {satellite.tle2}
       </span>
+      {!isPlaceholder && typeof satellite.id === 'string' && typeof onDelete === 'function' && (
+        <button
+          aria-label="Delete satellite"
+          onClick={(e) => {
+            e.stopPropagation();
+            onDelete(satellite.id);
+          }}
+          className="text-(--destructive) hover:text-(--foreground) absolute right-2 top-2 cursor-pointer text-xl font-bold focus:outline-none"
+        >
+          ×
+        </button>
+      )}
     </li>
   );
 };

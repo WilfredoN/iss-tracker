@@ -1,6 +1,7 @@
 import type { Satellite } from '../../../types/satellite';
 import { NoSatellites } from './NoSatellites';
 import { SatelliteListItem } from './SatelliteListItem';
+import { useSatellites } from '../hooks/useSatellites';
 import { useSatelliteStore } from '../../../store';
 import { useShallow } from 'zustand/react/shallow';
 
@@ -22,6 +23,7 @@ export const SatelliteList = ({ satellites, panel }: SatelliteListProps) => {
     }
   };
 
+  const { removeSatellite } = useSatellites();
   return (
     <ul className="flex-1 space-y-2 overflow-y-auto" onClick={resetSelectionOnClick}>
       {panel && <li>{panel}</li>}
@@ -29,7 +31,7 @@ export const SatelliteList = ({ satellites, panel }: SatelliteListProps) => {
         <NoSatellites />
       ) : (
         satellites.map((satellite) => (
-          <SatelliteListItem key={satellite.id} satellite={satellite} />
+          <SatelliteListItem key={satellite.id} satellite={satellite} onDelete={removeSatellite} />
         ))
       )}
     </ul>

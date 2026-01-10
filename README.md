@@ -61,7 +61,7 @@
   - [x] Migrate from vanilla JS to React
   - [x] Integrate Cesium globe for satellite visualization
   - [x] Display satellites on globe
-  - [ ] Support tracking of any number of satellites (>=1)
+  - [x] Support tracking of any number of satellites (>=1)
   - [ ] Add estimation of when satellite passes over user location next time
   - [ ] Improve UI/UX for satellite management
 
@@ -73,7 +73,7 @@
   - [ ] Add more user commands and help
 
 - [ ] **Integration & Dashboard**
-  - [ ] Combine client, backend, and bot into a unified dashboard app
+  - [x] Combine client, backend, and bot into a unified dashboard app
   - [ ] Add admin/monitoring features
 
 - [ ] **Testing & Quality**
