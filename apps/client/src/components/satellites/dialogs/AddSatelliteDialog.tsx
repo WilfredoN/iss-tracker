@@ -50,15 +50,15 @@ export const AddSatelliteDialog = ({ open, onOpenChange, onAdd }: AddSatelliteDi
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm">
       <div
         ref={dialogRef}
-        className="animate-fade-in relative w-full max-w-md border-2 border-[var(--foreground)] bg-[var(--panel-bg)] p-6 shadow-[var(--glow-strong)]"
+        className="animate-fade-in border-(--foreground) bg-(--panel-bg) shadow-(--glow-strong) relative w-full max-w-md border-2 p-6"
       >
-        <h2 className="border-b-2 border-[var(--foreground)] pb-2 text-lg font-bold uppercase tracking-widest text-[var(--foreground)]">
+        <h2 className="border-(--foreground) text-(--foreground) border-b-2 pb-2 text-lg font-bold uppercase tracking-widest">
           &gt; ADD SATELLITE
         </h2>
         <button
           aria-label="Close"
           onClick={handleClose}
-          className="absolute right-4 top-4 cursor-pointer text-2xl font-bold text-[var(--foreground)] transition-colors hover:text-[var(--destructive)] focus:outline-none"
+          className="text-(--foreground) hover:text-(--destructive) absolute right-4 top-4 cursor-pointer text-2xl font-bold transition-colors focus:outline-none"
         >
           ×
         </button>
