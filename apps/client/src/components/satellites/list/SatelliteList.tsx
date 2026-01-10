@@ -5,9 +5,10 @@ import { NoSatellites } from './NoSatellites';
 
 type SatelliteListProps = {
   satellites: Satellite[];
+  panel?: React.ReactNode;
 };
 
-export const SatelliteList = ({ satellites }: SatelliteListProps) => {
+export const SatelliteList = ({ satellites, panel }: SatelliteListProps) => {
   const { selectedSatellite, selectSatellite, clearSelection } = useSatelliteStore(
     useShallow((state) => ({
       selectedSatellite: state.selectedSatellite,
@@ -23,6 +24,7 @@ export const SatelliteList = ({ satellites }: SatelliteListProps) => {
   };
   return (
     <ul className="flex-1 space-y-2 overflow-y-auto pr-1" onClick={handleUlClick}>
+      {panel && <li>{panel}</li>}
       {satellites.length === 0 ? (
         <NoSatellites />
       ) : (
@@ -32,10 +34,10 @@ export const SatelliteList = ({ satellites }: SatelliteListProps) => {
             <li
               key={satellite.id}
               className={[
-                'group flex cursor-pointer flex-col border-2 border-[var(--foreground)] px-3 py-2 transition-all',
+                'border-(--foreground) group flex cursor-pointer flex-col border-2 px-3 py-2 transition-all',
                 isSelected
-                  ? 'bg-[var(--foreground)] text-[var(--background)] shadow-[var(--glow)]'
-                  : 'bg-[var(--input)] hover:bg-[var(--foreground)] hover:text-[var(--background)] hover:shadow-[var(--glow)]',
+                  ? 'bg-(--foreground) text-(--background) shadow-(--glow)'
+                  : 'bg-(--input) hover:bg-(--foreground) hover:text-(--background) hover:shadow-(--glow)',
               ].join(' ')}
               onClick={() => selectSatellite(satellite)}
             >

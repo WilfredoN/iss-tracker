@@ -12,7 +12,9 @@ export const useSatellites = (filter: string = '', usePlaceholder = true) => {
   const {
     data: satellites = [],
     isLoading,
+    isFetching,
     error,
+    refetch,
   } = useQuery<Satellite[]>({
     queryKey: [...SATELLITES_QUERY_KEY, filter.trim().toLowerCase() || 'all'],
     queryFn: satelliteService.getAll,
@@ -54,8 +56,10 @@ export const useSatellites = (filter: string = '', usePlaceholder = true) => {
   return {
     satellites,
     isLoading,
+    isFetching,
     error,
     addSatellite,
     removeSatellite,
+    refetch,
   };
 };

@@ -50,7 +50,7 @@ export const AddSatelliteDialog = ({ open, onOpenChange, onAdd }: AddSatelliteDi
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm">
       <div
         ref={dialogRef}
-        className="animate-fade-in border-(--foreground) bg-(--panel-bg) shadow-(--glow-strong) relative w-full max-w-md border-2 p-6"
+        className="animate-fade-in border-(--foreground) bg-(--panel-bg) relative w-full max-w-md border-2 p-6"
       >
         <h2 className="border-(--foreground) text-(--foreground) border-b-2 pb-2 text-lg font-bold uppercase tracking-widest">
           &gt; ADD SATELLITE

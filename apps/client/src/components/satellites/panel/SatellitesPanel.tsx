@@ -13,7 +13,7 @@ import { ISS_PLACEHOLDER } from '../../../services/placeholderSatellite';
 export const SatellitesPanel = () => {
   const [search, setSearch] = useState('');
   const [addOpen, setAddOpen] = useState(false);
-  const { satellites, isLoading, error, addSatellite } = useSatellites(search);
+  const { satellites, isLoading, isFetching, error, addSatellite, refetch } = useSatellites(search);
 
   const handleAddClick = () => setAddOpen(true);
 
@@ -24,13 +24,13 @@ export const SatellitesPanel = () => {
         onSearchChange={setSearch}
         onAddClick={handleAddClick}
       />
-      {isLoading ? (
-        <SatellitesPanelLoading />
+      {isLoading || isFetching ? (
+        <SatelliteList panel={<SatellitesPanelLoading />} satellites={[ISS_PLACEHOLDER]} />
       ) : error ? (
-        <>
-          <SatellitesPanelError />
-          <SatelliteList satellites={[ISS_PLACEHOLDER]} />
-        </>
+        <SatelliteList
+          panel={<SatellitesPanelError onRetry={refetch} />}
+          satellites={[ISS_PLACEHOLDER]}
+        />
       ) : (
         <SatelliteList satellites={satellites ?? []} />
       )}
