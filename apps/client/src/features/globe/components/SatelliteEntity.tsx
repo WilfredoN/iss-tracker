@@ -1,6 +1,6 @@
+import * as Cesium from 'cesium';
 import { useMemo } from 'react';
 import { Entity } from 'resium';
-import * as Cesium from 'cesium';
 import type { Satellite } from '../../../types/satellite';
 import { tleToCartesian } from '../helpers/tleToCartesian';
 
@@ -21,12 +21,30 @@ export const SatelliteEntity = ({ satellite }: Props) => {
     [satellite.tle1, satellite.tle2],
   );
 
+  const pointSize = useMemo(
+    () =>
+      new Cesium.CallbackProperty((time) => {
+        const julian = time ?? Cesium.JulianDate.now();
+        const date = Cesium.JulianDate.toDate(julian);
+        const t = date.getTime() / 1500;
+        return 8 + Math.abs(Math.sin(t)) * 6;
+      }, false),
+    [],
+  );
+
   return (
     <Entity
       id={satellite.id}
       name={satellite.name}
       position={position}
-      point={{ pixelSize: 8, color: Cesium.Color.CHARTREUSE }}
+      // point={{ pixelSize: 8, color: Cesium.Color.CHARTREUSE }}
+      point={{
+        pixelSize: pointSize,
+        color: Cesium.Color.CHARTREUSE,
+        outlineColor: Cesium.Color.WHITE,
+        outlineWidth: 2,
+        disableDepthTestDistance: Number.POSITIVE_INFINITY,
+      }}
       label={{
         text: satellite.name,
         fillColor: Cesium.Color.CHARTREUSE,
@@ -37,11 +55,14 @@ export const SatelliteEntity = ({ satellite }: Props) => {
         pixelOffset: new Cesium.Cartesian2(10, 0),
       }}
       path={{
-        resolution: 12,
-        material: Cesium.Color.CHARTREUSE.withAlpha(0.6),
-        width: 2,
-        leadTime: 1800,
-        trailTime: 900,
+        resolution: 24,
+        material: new Cesium.PolylineGlowMaterialProperty({
+          glowPower: 0.2,
+          color: Cesium.Color.CYAN.withAlpha(0.7),
+        }),
+        width: 4,
+        leadTime: 3600,
+        trailTime: 1800,
       }}
     />
   );

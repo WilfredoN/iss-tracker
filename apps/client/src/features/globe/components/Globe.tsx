@@ -1,16 +1,16 @@
+import type * as CesiumType from 'cesium';
 import { useEffect, useMemo, useRef } from 'react';
-import { Viewer } from 'resium';
 import type { CesiumComponentRef } from 'resium';
-import type * as Cesium from 'cesium';
-import { SatellitesLayer } from './SatellitesLayer';
+import { Viewer } from 'resium';
 import { useSatellites } from '../../../components/satellites/hooks/useSatellites';
 import { ISS_PLACEHOLDER } from '../../../services/placeholderSatellite';
-import { useRealtimeClock } from '../hooks/useRealtimeClock';
 import { useSatelliteStore } from '../../../store';
+import { useRealtimeClock } from '../hooks/useRealtimeClock';
+import { SatellitesLayer } from './SatellitesLayer';
 
 export const Globe = () => {
   const { satellites, error, isLoading, isFetching } = useSatellites('', true);
-  const viewerRef = useRef<CesiumComponentRef<Cesium.Viewer>>(null);
+  const viewerRef = useRef<CesiumComponentRef<CesiumType.Viewer>>(null);
   const selectedSatellite = useSatelliteStore((state) => state.selectedSatellite);
   useRealtimeClock(viewerRef);
   const sats = useMemo(() => {
@@ -27,6 +27,7 @@ export const Globe = () => {
   useEffect(() => {
     if (!viewerRef.current?.cesiumElement) return;
     const viewer = viewerRef.current.cesiumElement;
+
     if (!selectedSatellite) {
       viewer.trackedEntity = undefined;
 
@@ -57,6 +58,13 @@ export const Globe = () => {
         infoBox={false}
         navigationHelpButton={false}
         fullscreenButton={false}
+        resolutionScale={1.5}
+        useBrowserRecommendedResolution={true}
+        skyBox={false}
+        skyAtmosphere={false}
+        shadows={false}
+        scene3DOnly={true}
+        creditContainer={undefined}
       >
         <SatellitesLayer satellites={sats} />
       </Viewer>
