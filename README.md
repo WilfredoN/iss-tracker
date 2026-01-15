@@ -65,7 +65,7 @@
   - [ ] Display random tips, satellite facts, or ASCII art in a terminal-style-box
   - [ ] Benchmark and optimize performance for large number of satellites
   - [ ] Show user's location on the globe
-  - [ ] Display satellite details on click
+  - [x] Display satellite details on click
   - [ ] Add estimation of when satellite passes over user location next time
   - [ ] Improve UI/UX for satellite management
 
