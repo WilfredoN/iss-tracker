@@ -1,20 +1,16 @@
-export interface Satellite {
+export interface TLE {
+  tle1: string;
+  tle2: string;
+}
+
+export interface AddSatelliteData extends TLE {
+  name: string;
+}
+
+export interface Satellite extends AddSatelliteData {
   id: string;
-  name: string;
-  tle1: string;
-  tle2: string;
 }
 
-export interface AddSatelliteData {
-  name: string;
-  tle1: string;
-  tle2: string;
-}
-
-export interface SatelliteApi {
-  id: number;
-  name: string;
-  tle_1: string;
-  tle_2: string;
+export interface SatelliteApi extends Satellite {
   added_at?: string;
 }
