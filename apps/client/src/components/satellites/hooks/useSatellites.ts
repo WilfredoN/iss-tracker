@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import type { Satellite, AddSatelliteData } from '../../../types/satellite';
 import { satelliteService } from '../../../services/satelliteService';
-import { ISS_PLACEHOLDER } from '../../../services/placeholderSatellite';
+import { ISS_PLACEHOLDER } from '../../../services/mocks/placeholderSatellite';
 
 const SATELLITES_QUERY_KEY = ['satellites'];
 

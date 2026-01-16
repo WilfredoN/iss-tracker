@@ -35,6 +35,20 @@ def get_db():
 async def root():
     return {"status": "for all mankind"}
 
+@app.get("/users")
+async def get_users(db: Session = Depends(get_db)):
+    users = db.query(UserModel).all()
+    result = [
+        {
+            "id": user.id,
+            "chat_id": user.chat_id,
+            "latitude": user.latitude,
+            "longitude": user.longitude,
+            "created_at": user.created_at,
+        }
+        for user in users
+    ]
+    return {"users": result}
 
 @app.post("/users")
 async def create_user(user: UserBase, db: Session = Depends(get_db)):
@@ -51,6 +65,28 @@ async def create_user(user: UserBase, db: Session = Depends(get_db)):
         db.add(db_user)
     db.commit()
     return {"message": f"User with chat_id {user.chat_id} created!"}
+
+@app.get("/users/{id}")
+async def get_user(id: int, db: Session = Depends(get_db)):
+    from fastapi.responses import JSONResponse
+    db_user = db.query(UserModel).filter(UserModel.id == id).first()
+    if not db_user:
+        return JSONResponse(
+            status_code=404,
+            content={
+                "error": {
+                    "message": "User not found",
+                    "code": 404
+                }
+            }
+        )
+    return {
+        "id": db_user.id,
+        "chat_id": db_user.chat_id,
+        "latitude": db_user.latitude,
+        "longitude": db_user.longitude,
+        "created_at": db_user.created_at,
+    }
 
 
 @app.patch("/users/{id}")

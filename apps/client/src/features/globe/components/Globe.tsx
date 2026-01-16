@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef } from 'react';
 import type { CesiumComponentRef } from 'resium';
 import { Viewer } from 'resium';
 import { useSatellites } from '../../../components/satellites/hooks/useSatellites';
-import { ISS_PLACEHOLDER } from '../../../services/placeholderSatellite';
+import { ISS_PLACEHOLDER } from '../../../services/mocks/placeholderSatellite';
 import { useSatelliteStore } from '../../../store';
 import { useRealtimeClock } from '../hooks/useRealtimeClock';
 

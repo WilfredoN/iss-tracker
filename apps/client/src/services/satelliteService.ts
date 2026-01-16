@@ -1,7 +1,6 @@
+import { API_URL } from '.';
 import type { AddSatelliteData, Satellite } from '../types/satellite';
 import { mapApiToSatellite } from './mappers';
-
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 export const satelliteService = {
   async getAll(): Promise<Satellite[]> {

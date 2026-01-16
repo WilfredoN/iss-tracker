@@ -1,4 +1,6 @@
-export const ISS_PLACEHOLDER = {
+import type { Satellite } from '../../types';
+
+export const ISS_PLACEHOLDER: Satellite = {
   id: 'iss',
   name: 'ISS (ZARYA)',
   tle1: '1 25544U 98067A   26009.79019308  .00009674  00000+0  18216-3 0  9990',
