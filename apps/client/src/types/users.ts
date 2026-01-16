@@ -1,5 +1,5 @@
-type Id = string | number;
-interface Coordinates {
+export type Id = string | number;
+export interface Coordinates {
   latitude: number;
   longitude: number;
 }
@@ -7,4 +7,5 @@ interface Coordinates {
 export interface User extends Coordinates {
   id: Id;
   chat_id: Id;
+  login: string;
 }

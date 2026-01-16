@@ -11,6 +11,10 @@ export const usersService = {
         throw new Error(`Response status: ${response.status}`);
       }
       const data = await response.json();
+      // If the API returns an array, pick the first user
+      if (Array.isArray(data.user)) {
+        return data.user[0] ?? null;
+      }
       return data.user as User;
     } catch (error) {
       console.error('Failed to fetch user:', error);
